@@ -1,4 +1,4 @@
-### Please see the full code documentation in docs.md 
+### Please see the full code documentation in doc.md 
 #### This repos does not require a .gitignore
 
 ##### License and Disclaimer:
