@@ -276,3 +276,16 @@ const imageSources = [];
                 console.error('Error accessing folder:', err);
             }
         }
+
+
+Even above 1.2GB of images, loading feels instant.
+The browser does not at all read file content immediately.
+It gets file handles (this is metadata).
+
+handle.getFile() gets a reference to the file, but does not load all the bytes into memory.
+URL.createObjectURL(file) creates a pointer (blob URL) that the browser can use.
+(looking like blob:null/fa2d8ec2-5fb8-4dfb-89cc-41eaba17ba14 )
+The image is only decoded when displayed. 
+But this is delegated to the moment when CSS applies backgroundImage.
+
+There is no need to ask for more memory efficiency. 
