@@ -1,3 +1,24 @@
+#### This repos does not require a .gitignore
+
+##### License and Disclaimer:
+
+- no restriction imposed by me. But you take all the risk and responsibility.
+- The code is plain vanilla js and inspired by Brad Traversy (owner of
+  Traversy Media). The Udemy Course has the name "50 Projects in 50 Days - HTML/CSS/JavaScript."
+  Brad's idea is precisely that the students pick his "starters" and then expand upon them.
+
+- "My code" is beyond the scope of this inspiring course, but
+  it is definetly still in the sense of the course. Gathering ideas,
+  keeping it simple and minimalistic.
+
+- It is also important to note that I am not a professional developer.
+  Codeing is one of my ways to experience "artificial intelligence".
+  Many of the ideas come from AI through continuously improved communication.
+
+### Code documentation below, under Code
+
+### what I learned (a lot)
+
 1. background-size: cover;
 
    Ensures that the background image completely covers the <div class="panel">,
@@ -207,15 +228,42 @@ Lazy loading effect: Only a few images are ever stored in memory, keeping perfor
 
 1. Implement backward scrolling? (Shift left instead of only right)
 
-<h1>Image Folder Loader</h1>
-    <button onclick="openImageFolder()">Open Image Folder</button>
+Make a header  
+html: <h1>Image Folder Loader</h1>
 
-    <script>
-        async function openImageFolder() {
-            try {
-                const dirHandle = await window.showDirectoryPicker();
-                const imageSources = [];
+Make a button to open the image folder on click of the button.
+<button class="btn">Open Image Folder</button>
 
+Use JavaScript to open the image folder.
+document.querySelector(".btn").addEventListener("click", openImageFolder);
+
+Generate a function to open the image folder.
+Docs: https://developer.mozilla.org/en-US/docs/Web/API/Window/showDirectoryPicker
+"The showDirectoryPicker() method of the Window interface displays a directory picker which allows the user to select a directory."
+So, we store the FileSystemDirectoryHandle in dirHandle (storing the return value of window.showDirectoryPicker() a so called FileSystemDirectoryHandle. How long are these words?).
+
+The for loop iterates over the entries of the "picked" directory. For each entry, it checks if the entry is a file (or a folder) and in the case of files, if the file's extension is.jpg,.jpeg,.png,.gif,.webp.
+
+Docs:https://developer.mozilla.org/en-US/docs/Web/API/FileSystemDirectoryHandle/entries
+"The entries() method of the FileSystemDirectoryHandle interface returns a new asynchronous iterator for the iteration of the key-value pairs of the entries within the FileSystemDirectoryHandle on which this method is called. The key-value pairs are in the form of an array like [key, value]."
+
+value - at this point in time is 'file' or 'directory'
+Docs: https://developer.mozilla.org/en-US/docs/Web/API/FileSystemHandle/kind
+"The kind read-only property of the FileSystemHandle interface returns the type of entry. This is 'file' if the associated entry is a file or 'directory'. It is used to distinguish files from directories when iterating over the contents of a directory."
+"The name read-only property of the FileSystemHandle interface returns the name of the entry represented by handle."
+
+This is just cut and paste from Mozilla, if you want so.
+The first question mark arises, if you want the files - say 11817 files -
+and I off these three lines
+const file = await handle.getFile();
+const url = URL.createObjectURL(file);
+imageSources.push(url);
+window.showDirectoryPicker().entries().getFile()
+
+async function openImageFolder() {
+try {
+const dirHandle = await window.showDirectoryPicker();
+const imageSources = [];
                 for await (const [name, handle] of dirHandle.entries()) {
                     if (handle.kind === 'file' && name.match(/\.(jpg|jpeg|png|gif|webp)$/i)) {
                         const file = await handle.getFile();
@@ -228,6 +276,3 @@ Lazy loading effect: Only a few images are ever stored in memory, keeping perfor
                 console.error('Error accessing folder:', err);
             }
         }
-    </script>
-
-</body>
