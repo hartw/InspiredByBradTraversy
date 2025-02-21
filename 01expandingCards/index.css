@@ -1,0 +1,162 @@
+@import url('https://fonts.googleapis.com/css?family=Muli&display=swap');
+
+* {
+  margin:0;
+  padding:0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Muli', sans-serif;
+  display: flex;
+  flex-direction: column;  /* Arrange items vertically */
+  align-items: center; /* Center horizontally */
+  justify-content: flex-start; /* Align content at the top */
+  height: 100vh;
+}
+
+
+h1 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin:4rem 0 2rem 0;
+}
+
+.center-btn-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: auto;
+}
+
+.btn-showDirPicker {
+  background-color: rgb(13, 93, 13);
+  color: #fff;
+  border: 0;
+  border-radius: 6px;
+  cursor: pointer;
+  font-family: inherit;
+  padding: 8px 40px;
+  font-size: 14px;
+}
+
+
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 90vw;
+}
+
+
+.panel {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 80vh;
+  border-radius: 50px;
+  color: #fff;
+  cursor: pointer;
+  flex: 0.5;
+  margin: 10px;
+  position: relative;
+  transition: all 700ms ease-in;
+}
+/* 
+
+.panel h3 {
+  font-size: 24px;
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  margin: 0;
+  opacity: 0;
+}
+*/
+
+.panel.active {
+  flex: 5;
+}
+
+/* 
+.panel.active h3 {
+  opacity: 1;
+  transition: opacity 0.3s ease-in 0.4s;
+} 
+*/
+
+
+.btn.next, .btn.prev {
+  background-color: rgb(89, 3, 169);
+  color: #fff;
+  border: 0;
+  border-radius: 6px;
+  cursor: pointer;
+  font-family: inherit;
+  padding: 8px 30px;
+  margin: 2rem 12px;
+  font-size: 14px;
+}
+
+.btn.next:active, .btn.prev:active  {
+  transform: scale(0.98);
+}
+
+.btn.next:focus, .btn.prev:focus {
+  outline: 0;
+}
+
+.btn.next:disabled, .btn.prev:disabled {
+  background-color: lightgrey;
+  cursor: not-allowed;
+}
+
+
+
+@media (max-width: 480px) {
+  .container {
+    width: 100vw;
+  }
+
+  .panel:nth-of-type(4),
+  .panel:nth-of-type(5) {
+    display: none;
+  }
+} 
+
+
+/* Small devices: Show only 1 image */
+@media (max-width: 390px) {
+  .container {
+      width: 100vw;
+  }
+  
+  .panel:nth-of-type(2),
+  .panel:nth-of-type(3) { 
+      display: none; /* Hide all but the first */
+  }
+}
+
+/* Medium devices (tablets, max-width: 768px): Show 3 images */
+@media (max-width: 768px) {
+  .container {
+      width: 90vw;
+  }
+
+  .panel:nth-of-type(4),
+  .panel:nth-of-type(5) { 
+      display: none; /* Hide panels 4 and 5 */
+  }
+}
+
+/* Large devices (desktops, default): Show 5 images */
+@media (min-width: 769px) {
+  .container {
+      width: 80vw;
+  }
+  
+  .panel {
+      display: block;
+  }
+}
